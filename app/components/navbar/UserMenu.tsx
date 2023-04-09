@@ -4,9 +4,12 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import MenuItem from './MenuItem';
 import useRegisterModal from '../../hooks/useRegisterModal';
+import useLoginModal from '../../hooks/useLoginModal';
+import { User } from '@prisma/client';
 
 const UserMenu = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = () => {
     setIsOpen((value) => !value);
@@ -43,10 +46,21 @@ const UserMenu = () => {
         '
         >
           <div className='flex flex-col cursor-pointer'>
-            <>
-              <MenuItem label='login' onClick={() => {}} />
-              <MenuItem label='sign up' onClick={registerModal.onOpen} />
-            </>
+            {false ? (
+              <>
+                <MenuItem label='My trips' onClick={() => {}} />
+                <MenuItem label='My Favorites' onClick={() => {}} />
+                <MenuItem label='My reservations' onClick={() => {}} />
+                <MenuItem label='My properties' onClick={() => {}} />
+                <MenuItem label='Airbnb my home' onClick={() => {}} />
+                <MenuItem label='logout' onClick={() => {}} />
+              </>
+            ) : (
+              <>
+                <MenuItem label='login' onClick={loginModal.onOpen} />
+                <MenuItem label='sign up' onClick={registerModal.onOpen} />
+              </>
+            )}
           </div>
         </div>
       )}
