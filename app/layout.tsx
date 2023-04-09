@@ -6,6 +6,7 @@ import ClientOnly from './components/ClientOnly';
 import RegisterModal from './components/Modals/RegisterModal';
 import ToasterProvider from './providers/ToasterProvider';
 import LoginModal from './components/Modals/LoginModal';
+import { SessionProvider } from 'next-auth/react';
 
 const font = Nunito({
   subsets: ['latin'],
@@ -24,12 +25,14 @@ export default function RootLayout({
       */}
       <head />
       <body className={font.className}>
-        <ClientOnly>
-          <ToasterProvider />
-          <LoginModal />
-          <RegisterModal />
-          <NavBar />
-        </ClientOnly>
+        <SessionProvider>
+          <ClientOnly>
+            <ToasterProvider />
+            <LoginModal />
+            <RegisterModal />
+            <NavBar />
+          </ClientOnly>
+        </SessionProvider>
         {children}
       </body>
     </html>
